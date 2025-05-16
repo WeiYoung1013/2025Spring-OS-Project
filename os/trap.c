@@ -212,7 +212,9 @@ void usertrap() {
     // are we still alive? pending signals may kill us.
     if ((killed = iskilled(p)) != 0)
         exit(killed);
-
+    
+    
+        //here
     usertrapret();
 }
 
