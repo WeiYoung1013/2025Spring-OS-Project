@@ -37,9 +37,11 @@ int siginit_fork(struct proc *parent, struct proc *child) {
     for (int i = SIGMIN; i <= SIGMAX; i++) {
         child->signal.sa[i] = parent->signal.sa[i];
     }
+    
+    // 继承父进程的信号掩码
     child->signal.sigmask = parent->signal.sigmask;
     
-    // 但清空待处理信号
+    // 清空所有pending信号
     child->signal.sigpending = 0;
     memset(child->signal.siginfos, 0, sizeof(child->signal.siginfos));
     
@@ -47,7 +49,7 @@ int siginit_fork(struct proc *parent, struct proc *child) {
 }
 
 int siginit_exec(struct proc *p) {
-    // 保留信号掩码和待处理信号
+    // 保存当前的信号掩码和pending信号
     sigset_t old_mask = p->signal.sigmask;
     sigset_t old_pending = p->signal.sigpending;
     siginfo_t old_infos[SIGMAX + 1];
@@ -62,7 +64,7 @@ int siginit_exec(struct proc *p) {
         }
     }
     
-    // 恢复信号掩码和待处理信号
+    // 恢复信号掩码和pending信号
     p->signal.sigmask = old_mask;
     p->signal.sigpending = old_pending;
     memmove(p->signal.siginfos, old_infos, sizeof(old_infos));
@@ -98,6 +100,10 @@ int do_signal(void) {
     if (sa->sa_sigaction == SIG_DFL) {
         switch (signo) {
             case SIGKILL:
+                // SIGKILL必须终止进程
+                setkilled(p, -10 - signo);
+                return 0;
+                
             case SIGTERM:
             case SIGUSR0:
             case SIGUSR1:
@@ -177,37 +183,8 @@ int do_signal(void) {
     kcontext.uc_mcontext.epc = tf->epc;
     
     // 保存通用寄存器
-    kcontext.uc_mcontext.regs[0] = tf->ra;
-    kcontext.uc_mcontext.regs[1] = old_sp;  // 保存原始栈指针
-    kcontext.uc_mcontext.regs[2] = tf->gp;
-    kcontext.uc_mcontext.regs[3] = tf->tp;
-    kcontext.uc_mcontext.regs[4] = tf->t0;
-    kcontext.uc_mcontext.regs[5] = tf->t1;
-    kcontext.uc_mcontext.regs[6] = tf->t2;
-    kcontext.uc_mcontext.regs[7] = tf->s0;
-    kcontext.uc_mcontext.regs[8] = tf->s1;
-    kcontext.uc_mcontext.regs[9] = tf->a0;
-    kcontext.uc_mcontext.regs[10] = tf->a1;
-    kcontext.uc_mcontext.regs[11] = tf->a2;
-    kcontext.uc_mcontext.regs[12] = tf->a3;
-    kcontext.uc_mcontext.regs[13] = tf->a4;
-    kcontext.uc_mcontext.regs[14] = tf->a5;
-    kcontext.uc_mcontext.regs[15] = tf->a6;
-    kcontext.uc_mcontext.regs[16] = tf->a7;
-    kcontext.uc_mcontext.regs[17] = tf->s2;
-    kcontext.uc_mcontext.regs[18] = tf->s3;
-    kcontext.uc_mcontext.regs[19] = tf->s4;
-    kcontext.uc_mcontext.regs[20] = tf->s5;
-    kcontext.uc_mcontext.regs[21] = tf->s6;
-    kcontext.uc_mcontext.regs[22] = tf->s7;
-    kcontext.uc_mcontext.regs[23] = tf->s8;
-    kcontext.uc_mcontext.regs[24] = tf->s9;
-    kcontext.uc_mcontext.regs[25] = tf->s10;
-    kcontext.uc_mcontext.regs[26] = tf->s11;
-    kcontext.uc_mcontext.regs[27] = tf->t3;
-    kcontext.uc_mcontext.regs[28] = tf->t4;
-    kcontext.uc_mcontext.regs[29] = tf->t5;
-    kcontext.uc_mcontext.regs[30] = tf->t6;
+    memmove(kcontext.uc_mcontext.regs, &tf->ra, 31 * sizeof(uint64));
+    
     
     // 5. 复制ucontext和siginfo到用户栈
     acquire(&mm->lock);
@@ -303,38 +280,7 @@ int sys_sigreturn() {
     p->signal.sigmask = kcontext.uc_sigmask;
     
     // 恢复通用寄存器
-    tf->epc = kcontext.uc_mcontext.epc;
-    tf->ra = kcontext.uc_mcontext.regs[0];
-    tf->sp = kcontext.uc_mcontext.regs[1];  // 恢复原始栈指针
-    tf->gp = kcontext.uc_mcontext.regs[2];
-    tf->tp = kcontext.uc_mcontext.regs[3];
-    tf->t0 = kcontext.uc_mcontext.regs[4];
-    tf->t1 = kcontext.uc_mcontext.regs[5];
-    tf->t2 = kcontext.uc_mcontext.regs[6];
-    tf->s0 = kcontext.uc_mcontext.regs[7];
-    tf->s1 = kcontext.uc_mcontext.regs[8];
-    tf->a0 = kcontext.uc_mcontext.regs[9];
-    tf->a1 = kcontext.uc_mcontext.regs[10];
-    tf->a2 = kcontext.uc_mcontext.regs[11];
-    tf->a3 = kcontext.uc_mcontext.regs[12];
-    tf->a4 = kcontext.uc_mcontext.regs[13];
-    tf->a5 = kcontext.uc_mcontext.regs[14];
-    tf->a6 = kcontext.uc_mcontext.regs[15];
-    tf->a7 = kcontext.uc_mcontext.regs[16];
-    tf->s2 = kcontext.uc_mcontext.regs[17];
-    tf->s3 = kcontext.uc_mcontext.regs[18];
-    tf->s4 = kcontext.uc_mcontext.regs[19];
-    tf->s5 = kcontext.uc_mcontext.regs[20];
-    tf->s6 = kcontext.uc_mcontext.regs[21];
-    tf->s7 = kcontext.uc_mcontext.regs[22];
-    tf->s8 = kcontext.uc_mcontext.regs[23];
-    tf->s9 = kcontext.uc_mcontext.regs[24];
-    tf->s10 = kcontext.uc_mcontext.regs[25];
-    tf->s11 = kcontext.uc_mcontext.regs[26];
-    tf->t3 = kcontext.uc_mcontext.regs[27];
-    tf->t4 = kcontext.uc_mcontext.regs[28];
-    tf->t5 = kcontext.uc_mcontext.regs[29];
-    tf->t6 = kcontext.uc_mcontext.regs[30];
+    memmove(&tf->ra,kcontext.uc_mcontext.regs, 31 * sizeof(uint64));
     
     return 0;
 }
@@ -367,10 +313,7 @@ int sys_sigprocmask(int how, const sigset_t __user *set, sigset_t __user *oldset
         return -1;
     }
         
-    // SIGKILL和SIGSTOP不能被屏蔽
-    new_mask &= ~(sigmask(SIGKILL) | sigmask(SIGSTOP));
-    
-    // 根据how参数修改信号掩码
+    // 在sys_sigprocmask中，确保SIGKILL不能被阻塞
     switch (how) {
         case SIG_BLOCK:
             p->signal.sigmask |= new_mask;
@@ -384,6 +327,9 @@ int sys_sigprocmask(int how, const sigset_t __user *set, sigset_t __user *oldset
         default:
             return -1;
     }
+    
+    // SIGKILL和SIGSTOP不能被屏蔽
+    p->signal.sigmask &= ~(sigmask(SIGKILL) | sigmask(SIGSTOP));
     
     return 0;
 }
