@@ -4,6 +4,7 @@
 #include "queue.h"
 #include "riscv.h"
 #include "vm.h"
+#include "signal/ksignal.h"
 
 enum {
     STDIN  = 0,
@@ -44,6 +45,8 @@ struct cpu {
 
 enum procstate { UNUSED, USED, SLEEPING, RUNNABLE, RUNNING, ZOMBIE };
 
+extern struct proc *pool[];
+
 // Per-process state
 struct proc {
     spinlock_t lock;
@@ -63,6 +66,9 @@ struct proc {
     struct trapframe *__kva trapframe;  // data page for trampoline.S
     uint64 __kva kstack;                // Virtual address of kernel stack
     struct context context;             // swtch() here to run process
+
+    // Project signal:
+    struct ksignal signal;
 };
 
 static inline int cpuid() {
