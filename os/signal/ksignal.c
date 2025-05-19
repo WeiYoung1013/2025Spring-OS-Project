@@ -168,7 +168,6 @@ int sys_sigaction(int signo, const sigaction_t __user *act, sigaction_t __user *
     if (act == NULL)
         return 0;
         
-    // SIGKILL和SIGSTOP不能被捕获或忽略
     if (signo == SIGKILL || signo == SIGSTOP)
         return -1;
         
