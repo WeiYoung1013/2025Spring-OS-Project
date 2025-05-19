@@ -12,63 +12,29 @@
  * @return int 
  */
 int siginit(struct proc *p) {
-    // 初始化信号处理方式为默认
+    // init default
     for (int i = SIGMIN; i <= SIGMAX; i++) {
         p->signal.sa[i].sa_sigaction = SIG_DFL;
         p->signal.sa[i].sa_mask = 0;
         p->signal.sa[i].sa_restorer = NULL;
     }
     
-    // 设置SIGCHLD的默认处理方式为忽略
+    // SIGCHLD->ignore
     p->signal.sa[SIGCHLD].sa_sigaction = SIG_IGN;
     
-    // 清空信号掩码和待处理信号
     p->signal.sigmask = 0;
     p->signal.sigpending = 0;
     
-    // 清空siginfo
     memset(p->signal.siginfos, 0, sizeof(p->signal.siginfos));
     
     return 0;
 }
 
 int siginit_fork(struct proc *parent, struct proc *child) {
-    // 复制父进程的信号处理方式和信号掩码
-    for (int i = SIGMIN; i <= SIGMAX; i++) {
-        child->signal.sa[i] = parent->signal.sa[i];
-    }
-    
-    // 继承父进程的信号掩码
-    child->signal.sigmask = parent->signal.sigmask;
-    
-    // 清空所有pending信号
-    child->signal.sigpending = 0;
-    memset(child->signal.siginfos, 0, sizeof(child->signal.siginfos));
-    
     return 0;
 }
 
 int siginit_exec(struct proc *p) {
-    // 保存当前的信号掩码和pending信号
-    sigset_t old_mask = p->signal.sigmask;
-    sigset_t old_pending = p->signal.sigpending;
-    siginfo_t old_infos[SIGMAX + 1];
-    memmove(old_infos, p->signal.siginfos, sizeof(old_infos));
-    
-    // 重置所有信号处理方式为默认，除了被忽略的信号
-    for (int i = SIGMIN; i <= SIGMAX; i++) {
-        if (p->signal.sa[i].sa_sigaction != SIG_IGN) {
-            p->signal.sa[i].sa_sigaction = SIG_DFL;
-            p->signal.sa[i].sa_mask = 0;
-            p->signal.sa[i].sa_restorer = NULL;
-        }
-    }
-    
-    // 恢复信号掩码和pending信号
-    p->signal.sigmask = old_mask;
-    p->signal.sigpending = old_pending;
-    memmove(p->signal.siginfos, old_infos, sizeof(old_infos));
-    
     return 0;
 }
 
@@ -79,28 +45,25 @@ int do_signal(void) {
     struct mm *mm = p->mm;
     sigset_t pending = p->signal.sigpending & ~p->signal.sigmask;
     
-    // 如果没有未被屏蔽的待处理信号，直接返回
     if (pending == 0)
         return 0;
         
-    // 按照编号顺序（优先级）处理信号
+    // process signal
     int signo;
     for (signo = SIGMIN; signo <= SIGMAX; signo++) {
         if (pending & sigmask(signo))
             break;
     }
     
-    // 清除pending标志
+    // delete pending
     p->signal.sigpending &= ~sigmask(signo);
     
-    // 获取信号处理方式
     sigaction_t *sa = &p->signal.sa[signo];
     
-    // 处理默认行为
+    // handle default
     if (sa->sa_sigaction == SIG_DFL) {
         switch (signo) {
             case SIGKILL:
-                // SIGKILL必须终止进程
                 setkilled(p, -10 - signo);
                 return 0;
                 
@@ -110,34 +73,31 @@ int do_signal(void) {
             case SIGUSR2:
             case SIGSEGV:
             case SIGINT:
-                // Term: 终止进程
+                // Term
                 setkilled(p, -10 - signo);
                 return 0;
                 
             case SIGSTOP:
-                // Stop: 停止进程（暂未实现）
-                p->state = SLEEPING;  // 将进程状态设置为SLEEPING
+                // TODO: Stop Process
+                p->state = SLEEPING;
                 sched();
                 return 0;
                 
             case SIGCONT:
-                // Continue: 继续进程（暂未实现）
+                // TODO: Continue Process
                 if (p->state == SLEEPING) {
                 p->state = RUNNABLE;
-                add_task(p);  // 将进程添加到运行队列
+                add_task(p);  
             }
                 return 0;
                 
             case SIGCHLD:
-                // Ign: 忽略信号
                 return 0;
         }
         return 0;
     }
     
-    // 如果是忽略信号
     if (sa->sa_sigaction == SIG_IGN) {
-        // SIGKILL和SIGSTOP不能被忽略
         if (signo == SIGKILL || signo == SIGSTOP) {
             setkilled(p, -10 - signo);
             return 0;
@@ -145,82 +105,68 @@ int do_signal(void) {
         return 0;
     }
     
-    // SIGKILL和SIGSTOP不能被捕获
     if (signo == SIGKILL || signo == SIGSTOP) {
         setkilled(p, -10 - signo);
         return 0;
     }
     
-    // 需要调用用户定义的处理函数
-    // 1. 保存当前的信号掩码
     sigset_t old_mask = p->signal.sigmask;
     
-    // 2. 设置新的信号掩码（在处理函数执行期间屏蔽当前信号和sa_mask中的信号）
     p->signal.sigmask |= (sa->sa_mask | sigmask(signo));
     
-    // 3. 在用户栈上构造ucontext和siginfo
     struct trapframe *tf = p->trapframe;
     uint64 old_sp = tf->sp;    
-    // 确保栈指针16字节对齐
     uint64 sp = old_sp & ~0xf;
     
-    // 为ucontext预留空间
     sp -= sizeof(struct ucontext);
-    sp &= ~0xf;  // 16字节对齐
+    sp &= ~0xf;  
     uint64 ucontext_addr = sp;
     
-    // 为siginfo预留空间
     sp -= sizeof(siginfo_t);
-    sp &= ~0xf;  // 16字节对齐
+    sp &= ~0xf;  
     uint64 siginfo_addr = sp;
     
-    // 为函数参数预留空间（保持栈16字节对齐）
-    sp -= 16;  // 为三个参数预留空间
+    sp -= 16;  
     
-    // 4. 填充ucontext
     struct ucontext kcontext;
     kcontext.uc_sigmask = old_mask;
     kcontext.uc_mcontext.epc = tf->epc;
     
-    // 保存通用寄存器
+    // save register
     memmove(kcontext.uc_mcontext.regs, &tf->ra, 31 * sizeof(uint64));
     
     
-    // 5. 复制ucontext和siginfo到用户栈
+    // 5. copy ucontext and siginfo
     acquire(&mm->lock);
     if (copy_to_user(mm, ucontext_addr, (char*)&kcontext, sizeof(struct ucontext)) < 0 ||
         copy_to_user(mm, siginfo_addr, (char*)&p->signal.siginfos[signo], sizeof(siginfo_t)) < 0) {
         release(&mm->lock);
-        p->signal.sigmask = old_mask;  // 恢复原来的信号掩码
+        p->signal.sigmask = old_mask; 
         return -1;
     }
     release(&mm->lock);
     
-    // 6. 修改trapframe，使得返回用户态时执行信号处理函数
-    tf->sp = sp;  // 新的栈顶
-    tf->epc = (uint64)sa->sa_sigaction;  // 信号处理函数地址
-    tf->ra = (uint64)sa->sa_restorer;  // ra: 恢复函数地址
+    // Modify trapframe 
+    tf->sp = sp;  
+    tf->epc = (uint64)sa->sa_sigaction; 
+    tf->ra = (uint64)sa->sa_restorer; 
     
-    // 设置信号处理函数的参数
-    tf->a0 = signo;  // 第一个参数：信号编号
-    tf->a1 = siginfo_addr;  // 第二个参数：siginfo结构体指针
-    tf->a2 = ucontext_addr;  // 第三个参数：ucontext结构体指针
+
+    tf->a0 = signo;  // First argument: signal number
+    tf->a1 = siginfo_addr;  // Second argument: pointer to siginfo struct
+    tf->a2 = ucontext_addr;  // Third argument: pointer to ucontext struct
     
     return 0;
 }
 
 // syscall handlers:
-//  sys_* functions are called by syscall.c
-
 int sys_sigaction(int signo, const sigaction_t __user *act, sigaction_t __user *oldact) {
     struct proc *p = curr_proc();
     struct mm *mm = p->mm;
     
-    // 检查信号编号是否有效
     if (signo < SIGMIN || signo > SIGMAX)
         return -1;
         
-    // 如果需要，保存旧的处理方式
     if (oldact != NULL) {
         acquire(&mm->lock);
         if (copy_to_user(mm, (uint64)oldact, (char*)&p->signal.sa[signo], sizeof(sigaction_t)) < 0) {
@@ -230,15 +176,13 @@ int sys_sigaction(int signo, const sigaction_t __user *act, sigaction_t __user *
         release(&mm->lock);
     }
     
-    // 如果set为NULL，仅返回旧的处理方式
     if (act == NULL)
         return 0;
         
-    // SIGKILL和SIGSTOP不能被捕获或忽略
     if (signo == SIGKILL || signo == SIGSTOP)
         return -1;
         
-    // 获取新的处理方式
+    // Get the new handler
     sigaction_t kact;
     acquire(&mm->lock);
     if (copy_from_user(mm, (char*)&kact, (uint64)act, sizeof(sigaction_t)) < 0) {
@@ -246,8 +190,6 @@ int sys_sigaction(int signo, const sigaction_t __user *act, sigaction_t __user *
         return -1;
     }
     release(&mm->lock);
-        
-    // 设置新的处理方式
     p->signal.sa[signo] = kact;
     
     return 0;
@@ -257,29 +199,22 @@ int sys_sigreturn() {
     struct proc *p = curr_proc();
     struct trapframe *tf = p->trapframe;
     
-    // 从用户栈上获取ucontext
     struct ucontext kcontext;
     uint64 sp = tf->sp;
     
-    // 跳过为参数预留的空间
+    // Skip the siginfo_t struct and the space reserved for arguments
     sp += 16;
-    
-    // 跳过siginfo_t结构体
     sp += sizeof(siginfo_t);
-    sp = (sp + 0xf) & ~0xf;  // 16字节对齐
+    sp = (sp + 0xf) & ~0xf; 
     
-    // 获取ucontext
+    // Retrieve ucontext
     acquire(&p->mm->lock);
     int ret = copy_from_user(p->mm, (char*)&kcontext, sp, sizeof(struct ucontext));
     release(&p->mm->lock);
     if (ret < 0) {
         return -1;
     }
-        
-    // 恢复信号掩码
     p->signal.sigmask = kcontext.uc_sigmask;
-    
-    // 恢复通用寄存器
     memmove(&tf->ra,kcontext.uc_mcontext.regs, 31 * sizeof(uint64));
     
     return 0;
@@ -289,8 +224,6 @@ int sys_sigprocmask(int how, const sigset_t __user *set, sigset_t __user *oldset
     struct proc *p = curr_proc();
     struct mm *mm = p->mm;
     sigset_t old_mask = p->signal.sigmask;
-    
-    // 如果需要，保存旧的信号掩码
     if (oldset != NULL) {
         acquire(&mm->lock);
         int ret = copy_to_user(mm, (uint64)oldset, (char*)&old_mask, sizeof(sigset_t));
@@ -300,11 +233,9 @@ int sys_sigprocmask(int how, const sigset_t __user *set, sigset_t __user *oldset
         }
     }
 
-    // 如果set为NULL，仅返回旧的信号掩码
     if (set == NULL)
         return 0;
-        
-    // 获取新的信号掩码
+
     sigset_t new_mask;
     acquire(&mm->lock);
     int ret = copy_from_user(mm, (char*)&new_mask, (uint64)set, sizeof(sigset_t));
@@ -313,7 +244,6 @@ int sys_sigprocmask(int how, const sigset_t __user *set, sigset_t __user *oldset
         return -1;
     }
         
-    // 在sys_sigprocmask中，确保SIGKILL不能被阻塞
     switch (how) {
         case SIG_BLOCK:
             p->signal.sigmask |= new_mask;
@@ -328,7 +258,7 @@ int sys_sigprocmask(int how, const sigset_t __user *set, sigset_t __user *oldset
             return -1;
     }
     
-    // SIGKILL和SIGSTOP不能被屏蔽
+    // SIGKILL and SIGSTOP cannot be blocked
     p->signal.sigmask &= ~(sigmask(SIGKILL) | sigmask(SIGSTOP));
     
     return 0;
@@ -351,24 +281,19 @@ int sys_sigpending(sigset_t __user *set) {
 }
 
 int sys_sigkill(int pid, int signo, int code) {
-    // 检查信号编号是否有效
     if (signo < SIGMIN || signo > SIGMAX)
         return -1;
 
-    // 遍历进程池查找目标进程
+    // Traverse the process pool to find the target process
     for (int i = 0; i < NPROC; i++) {
         struct proc *p = pool[i];
         acquire(&p->lock);
         if (p->pid == pid) {
-            // 设置pending信号
             p->signal.sigpending |= sigmask(signo);
-            
-            // 设置siginfo
             p->signal.siginfos[signo].si_signo = signo;
             p->signal.siginfos[signo].si_code = code;
             p->signal.siginfos[signo].si_pid = curr_proc()->pid;
             
-            // 如果进程在睡眠，唤醒它
             if (p->state == SLEEPING) {
                 p->state = RUNNABLE;
                 add_task(p);
@@ -380,5 +305,5 @@ int sys_sigkill(int pid, int signo, int code) {
         release(&p->lock);
     }
     
-    return -1;  // 未找到目标进程
+    return -1;  // Target process not found
 }
