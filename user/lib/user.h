@@ -28,6 +28,9 @@ void stdout_nobuf(void);
 void *malloc(uint);
 void free(void *);
 
+// signal.c
+unsigned int alarm(unsigned int seconds);
+
 // assert
 #define _STRINGIFY(s) #s
 #define STRINGIFY(s)  _STRINGIFY(s)

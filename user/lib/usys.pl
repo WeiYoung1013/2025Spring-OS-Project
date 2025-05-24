@@ -37,3 +37,4 @@ entry("sigreturn");
 entry("sigkill");
 entry("sigpending");
 entry("sigprocmask");
+entry("alarm");

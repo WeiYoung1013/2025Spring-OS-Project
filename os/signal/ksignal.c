@@ -5,6 +5,14 @@
 #include <trap.h>
 #include <string.h>
 #include <vm.h>
+#include <timer.h>
+
+// 定义alarm状态结构体
+struct {
+    struct spinlock lock;
+    uint64 alarm_time;  // 以CPU周期为单位的alarm时间
+} alarm_state;
+
 /**
  * @brief init the signal struct inside a PCB.
  * 
@@ -28,6 +36,10 @@ int siginit(struct proc *p) {
     
     // 清空siginfo
     memset(p->signal.siginfos, 0, sizeof(p->signal.siginfos));
+    
+    // 初始化alarm状态
+    spinlock_init(&alarm_state.lock, "alarm");
+    alarm_state.alarm_time = 0;
     
     return 0;
 }
@@ -206,6 +218,20 @@ int do_signal(void) {
     tf->a1 = siginfo_addr;  // 第二个参数：siginfo结构体指针
     tf->a2 = ucontext_addr;  // 第三个参数：ucontext结构体指针
     
+    // 检查alarm是否到期
+    acquire(&alarm_state.lock);
+    uint64 current_time = r_time();
+    if (alarm_state.alarm_time > 0 && current_time >= alarm_state.alarm_time) {
+        // 发送SIGALRM信号
+        p->signal.sigpending |= sigmask(SIGALRM);
+        p->signal.siginfos[SIGALRM].si_signo = SIGALRM;
+        p->signal.siginfos[SIGALRM].si_pid = p->pid;
+        
+        // 清除alarm时间
+        alarm_state.alarm_time = 0;
+    }
+    release(&alarm_state.lock);
+    
     return 0;
 }
 
@@ -381,4 +407,60 @@ int sys_sigkill(int pid, int signo, int code) {
     }
     
     return -1;  // 未找到目标进程
+}
+
+// 添加alarm系统调用实现
+unsigned int alarm(unsigned int seconds) {
+    struct proc *p = curr_proc();
+    uint64 current_time = r_time();
+    unsigned int remaining = 0;
+    
+    acquire(&alarm_state.lock);
+    
+    // 如果seconds为0，取消现有的alarm
+    if (seconds == 0) {
+        if (alarm_state.alarm_time > current_time) {
+            // 将CPU周期数转换为秒数
+            remaining = (alarm_state.alarm_time - current_time) / CPU_FREQ;
+        }
+        alarm_state.alarm_time = 0;
+    } else {
+        // 计算新的alarm时间（以CPU周期为单位）
+        uint64 new_alarm_time = current_time + seconds * CPU_FREQ;
+        
+        // 如果已有alarm，计算剩余时间
+        if (alarm_state.alarm_time > current_time) {
+            remaining = (alarm_state.alarm_time - current_time) / CPU_FREQ;
+        }
+        
+        // 设置新的alarm时间
+        alarm_state.alarm_time = new_alarm_time;
+    }
+    
+    release(&alarm_state.lock);
+    return remaining;
+}
+
+// 在定时器中断处理程序中检查alarm
+void check_alarm(void) {
+    struct proc *p = curr_proc();
+    if (p == NULL) {
+        return;  // 如果没有当前进程，直接返回
+    }
+    
+    uint64 current_time = r_time();
+    
+    acquire(&alarm_state.lock);
+    if (alarm_state.alarm_time > 0 && current_time >= alarm_state.alarm_time) {
+        // 发送SIGALRM信号
+        acquire(&p->lock);
+        p->signal.sigpending |= sigmask(SIGALRM);
+        p->signal.siginfos[SIGALRM].si_signo = SIGALRM;
+        p->signal.siginfos[SIGALRM].si_pid = p->pid;
+        release(&p->lock);
+        
+        // 清除alarm时间
+        alarm_state.alarm_time = 0;
+    }
+    release(&alarm_state.lock);
 }

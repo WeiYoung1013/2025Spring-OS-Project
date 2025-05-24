@@ -14,9 +14,10 @@
 #define SIGCONT 8
 #define SIGSEGV 9
 #define SIGINT  10
+#define SIGALRM 11
 
 #define SIGMIN SIGUSR0
-#define SIGMAX SIGINT
+#define SIGMAX SIGALRM
 
 #define sigmask(signo) (1 << (signo))
 

@@ -12,6 +12,9 @@ struct ksignal {
 };
 
 struct proc;  // forward declaration
+
+
+
 int siginit(struct proc *p);
 int siginit_fork(struct proc *parent, struct proc* child);
 int siginit_exec(struct proc *p);
@@ -24,5 +27,8 @@ int sys_sigreturn();
 int sys_sigprocmask(int how, const sigset_t __user *set, sigset_t __user *oldset);
 int sys_sigpending(sigset_t __user *set);
 int sys_sigkill(int pid, int signo, int code);
+void check_alarm(void);
+// alarm系统调用
+unsigned int alarm(unsigned int seconds);
 
 #endif

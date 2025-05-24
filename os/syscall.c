@@ -169,6 +169,10 @@ int64 sys_write(int fd, uint64 __user va, uint len) {
     return user_console_write(va, len);
 }
 
+int64 sys_alarm(unsigned int seconds) {
+    return alarm(seconds);
+}
+
 void syscall() {
     struct trapframe *trapframe = curr_proc()->trapframe;
     int id                      = trapframe->a7;
@@ -232,6 +236,9 @@ void syscall() {
             break;
         case SYS_sigpending:
             ret = sys_sigpending((sigset_t *)args[0]);
+            break;
+        case SYS_alarm:
+            ret = sys_alarm(args[0]);
             break;
         default:
             ret = -1;

@@ -362,3 +362,72 @@ void basic20(char *s) {
         assert(ret == 1); // child should not be terminated by SIGUSR0
     }
 }
+
+// Base Checkpoint 4: alarm system call
+
+// alarm信号处理函数
+void handler_alarm(int signo, siginfo_t* info, void* ctx) {
+    assert(signo == SIGALRM);
+    assert(info->si_signo == SIGALRM);
+    assert(info->si_pid == getpid());
+    fprintf(1, "SIGALRM handler triggered!\n");
+    fprintf(1, "Signal number: %d\n", signo);
+    fprintf(1, "Process ID: %d\n", info->si_pid);
+    exit(200);
+}
+
+// 测试alarm系统调用
+void basic_alarm(char* s) {
+    int pid = fork();
+    if (pid == 0) {
+        // 子进程
+        fprintf(1, "Child process started\n");
+        
+        // 测试1：设置SIGALRM信号处理函数
+        sigaction_t sa = {
+            .sa_sigaction = handler_alarm,
+            .sa_restorer = sigreturn,
+        };
+        sigemptyset(&sa.sa_mask);
+        sigaction(SIGALRM, &sa, 0);
+        fprintf(1, "SIGALRM handler set\n");
+        
+        // 测试2：首次设置alarm，应该返回0（之前没有alarm）
+        fprintf(1, "Setting first alarm for 5 seconds...\n");
+        unsigned int remaining = alarm(5);
+        fprintf(1, "Previous alarm remaining time: %d seconds\n", remaining);
+        assert_eq(remaining, 0);  // 之前没有alarm，应该返回0
+        
+        // 测试3：在alarm到期前设置新的alarm，应该返回剩余时间
+        sleep(2);  // 等待2秒
+        fprintf(1, "Setting new alarm for 3 seconds...\n");
+        remaining = alarm(3);
+        fprintf(1, "Previous alarm remaining time: %d seconds\n", remaining);
+        assert(remaining > 0);  // 应该返回剩余时间（约3秒）
+        
+        // 测试4：取消alarm，应该返回剩余时间
+        sleep(1);  // 等待1秒
+        fprintf(1, "Canceling alarm...\n");
+        remaining = alarm(0);
+        fprintf(1, "Previous alarm remaining time: %d seconds\n", remaining);
+        assert(remaining > 0);  // 应该返回剩余时间（约2秒）
+        
+        // 测试5：设置新的alarm，应该返回0（之前的alarm已被取消）
+        fprintf(1, "Setting final alarm for 2 seconds...\n");
+        remaining = alarm(2);
+        fprintf(1, "Previous alarm remaining time: %d seconds\n", remaining);
+        assert_eq(remaining, 0);  // 之前的alarm已被取消，应该返回0
+        
+        // 等待alarm信号
+        fprintf(1, "Waiting for alarm...\n");
+        while(1);
+        exit(1);
+    } else {
+        // 父进程
+        fprintf(1, "Parent process waiting for child...\n");
+        int ret;
+        wait(0, &ret);
+        fprintf(1, "Child process exited with code: %d\n", ret);
+        assert_eq(ret, 200);  // 信号处理函数应该返回200
+    }
+}

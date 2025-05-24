@@ -38,6 +38,7 @@ static int handle_intr(void) {
             release(&tickslock);
         }
         set_next_timer();
+        check_alarm();
         return 1;
     } else if (code == SupervisorExternal) {
         tracef("s-external interrupt from usertrap!");
