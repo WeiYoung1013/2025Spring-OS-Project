@@ -94,7 +94,7 @@ int do_signal(void) {
     // 如果没有未被屏蔽的待处理信号，直接返回
     if (pending == 0)
         return 0;
-        
+
     // 按照编号顺序（优先级）处理信号
     int signo;
     for (signo = SIGMIN; signo <= SIGMAX; signo++) {
@@ -181,6 +181,20 @@ int do_signal(void) {
     sp &= ~0xf;  // 16字节对齐
     uint64 ucontext_addr = sp;
     
+  
+    siginfo_t *kinfo = &p->signal.siginfos[signo];
+    kinfo->si_signo  = signo;
+    // 如果 si_pid 已由 sys_sigkill 设置则保持，否则置为 -1（内核触发）
+    kinfo->si_pid    = (kinfo->si_pid != 0 ? kinfo->si_pid : -1);
+    kinfo->si_code   = 0;
+    kinfo->si_status = 0;
+    kinfo->addr      = NULL;
+    printf("do_signal: signo=%d, pid=%d, code=%d, status=%d\n", 
+                    signo, 
+                    kinfo->si_pid, 
+                    kinfo->si_code, 
+                    kinfo->si_status);
+
     // 为siginfo预留空间
     sp -= sizeof(siginfo_t);
     sp &= ~0xf;  // 16字节对齐
@@ -201,7 +215,7 @@ int do_signal(void) {
     // 5. 复制ucontext和siginfo到用户栈
     acquire(&mm->lock);
     if (copy_to_user(mm, ucontext_addr, (char*)&kcontext, sizeof(struct ucontext)) < 0 ||
-        copy_to_user(mm, siginfo_addr, (char*)&p->signal.siginfos[signo], sizeof(siginfo_t)) < 0) {
+        copy_to_user(mm, siginfo_addr, (char*)kinfo, sizeof(siginfo_t)) < 0) {
         release(&mm->lock);
         p->signal.sigmask = old_mask;  // 恢复原来的信号掩码
         return -1;
@@ -389,10 +403,16 @@ int sys_sigkill(int pid, int signo, int code) {
             // 设置pending信号
             p->signal.sigpending |= sigmask(signo);
             
+            printf("original_siginfo: signo=%d, pid=%d, code=%d, status=%d\n", 
+                p->signal.siginfos[signo].si_signo,
+                p->signal.siginfos[signo].si_pid, 
+                p->signal.siginfos[signo].si_code,
+                p->signal.siginfos[signo].si_status);
+
             // 设置siginfo
+            p->signal.siginfos[signo].si_pid = curr_proc()->pid;
             p->signal.siginfos[signo].si_signo = signo;
             p->signal.siginfos[signo].si_code = code;
-            p->signal.siginfos[signo].si_pid = curr_proc()->pid;
             
             // 如果进程在睡眠，唤醒它
             if (p->state == SLEEPING) {

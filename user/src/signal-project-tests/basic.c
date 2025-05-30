@@ -431,3 +431,90 @@ void basic_alarm(char* s) {
         assert_eq(ret, 200);  // 信号处理函数应该返回200
     }
 }
+
+// 验证 siginfo_t 结构体的各字段：
+// si_signo  应是 SIGUSR1
+// si_pid    应是发送者（parent）的 pid
+// si_code   应为 0
+// si_status 应为 0
+// addr      应为 NULL
+void siginfo_handler(int signo, siginfo_t *info, void *ctx) {
+    printf("Check signo=%d, pid=%d, code=%d, status=%d\n", info->si_signo, info->si_pid, info->si_code, info->si_status);
+
+    // 检查信号编号
+    assert(signo == SIGUSR1);
+    // 检查 si_signo
+    assert(info->si_signo == SIGUSR1);
+    // 检查 si_pid（父进程发送）
+    int ppid = getppid();
+    assert(info->si_pid == ppid);
+    // 检查其他字段
+    assert(info->si_code == 0);
+    assert(info->si_status == 0);
+    assert(info->addr == NULL);
+
+    // 如果都通过，则退出并返回特定码
+    exit(123);
+}
+
+void basic_siginfo_check(char *s) {
+    // 在子进程安装 handler
+    int pid = fork();
+    if (pid == 0) {
+        sigaction_t sa = {
+            .sa_sigaction = siginfo_handler,
+            .sa_restorer  = sigreturn,
+        };
+        sigemptyset(&sa.sa_mask);
+        sigaction(SIGUSR1, &sa, NULL);
+
+        // 等待信号
+        while (1) sleep(1);
+    } else {
+        // 父进程稍等，让子进程安装好 handler
+        sleep(5);
+        // 由父进程发送 SIGUSR1
+        sigkill(pid, SIGUSR1, 2);
+
+        // 等待子进程退出并检查它的 exit code
+        int status;
+        wait(0, &status);
+        // 我们在 handler 里用 exit(123)，因此这里应该收到 123
+        assert_eq(status, 123);
+    }
+}
+
+
+// 验证由内核发送 SIGCHLD 信号时，siginfo_t 的 si_pid 字段应为子进程 pid
+void siginfo_chld_handler(int signo, siginfo_t *info, void *ctx) {
+    assert(signo == SIGCHLD);
+    assert(info->si_signo == SIGCHLD);
+    // si_pid 应为子进程 pid
+    assert(info->si_pid > 0);
+    // 其余字段通常为 0
+    assert(info->si_code == 0);
+    assert(info->si_status == 0);
+    assert(info->addr == NULL);
+    exit(125);
+}
+
+void basic_siginfo_chld_check(char *s) {
+    int pid = fork();
+    if (pid == 0) {
+        exit(77); // 子进程直接退出
+    } else {
+        sigaction_t sa = {
+            .sa_sigaction = siginfo_chld_handler,
+            .sa_restorer  = sigreturn,
+        };
+        sigemptyset(&sa.sa_mask);
+        sigaction(SIGCHLD, &sa, NULL);
+
+        // 等待 handler 被触发
+        int status;
+        wait(0, &status);
+        // handler exit(125) 后父进程应退出
+        assert_eq(status, 125);
+    }
+}
+
