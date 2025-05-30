@@ -28,7 +28,7 @@ int siginit(struct proc *p) {
     }
     
     // 设置SIGCHLD的默认处理方式为忽略
-    p->signal.sa[SIGCHLD].sa_sigaction = SIG_IGN;
+    // p->signal.sa[SIGCHLD].sa_sigaction = SIG_IGN;
     
     // 清空信号掩码和待处理信号
     p->signal.sigmask = 0;
@@ -186,8 +186,10 @@ int do_signal(void) {
     kinfo->si_signo  = signo;
     // 如果 si_pid 已由 sys_sigkill 设置则保持，否则置为 -1（内核触发）
     kinfo->si_pid    = (kinfo->si_pid != 0 ? kinfo->si_pid : -1);
-    kinfo->si_code   = 0;
-    kinfo->si_status = 0;
+    if(kinfo->si_signo != SIGCHLD){
+        kinfo->si_code   = 0;
+        kinfo->si_status = 0;
+    }
     kinfo->addr      = NULL;
     printf("do_signal: signo=%d, pid=%d, code=%d, status=%d\n", 
                     signo, 

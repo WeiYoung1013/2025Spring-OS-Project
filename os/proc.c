@@ -294,6 +294,7 @@ int wait(int pid, int __user *code) {
                     release(&child->lock);
 
                     release(&wait_lock);
+                    printf("cpid = %d\n", cpid);
                     return cpid;
                 }
             }
@@ -336,6 +337,18 @@ void exit(int code) {
             // if child has dead, wake up init to do clean up.
         }
         release(&child->lock);
+    }
+    struct proc *parent = p->parent;
+    //Send SIGCHLD
+    if (parent) {
+        acquire(&parent->lock);
+        parent->signal.sigpending |= sigmask(SIGCHLD);
+        parent->signal.siginfos[SIGCHLD].si_signo = SIGCHLD;
+        parent->signal.siginfos[SIGCHLD].si_pid = p->pid;
+        parent->signal.siginfos[SIGCHLD].si_code = code; // 退出码
+        parent->signal.siginfos[SIGCHLD].si_status = 0;
+        parent->signal.siginfos[SIGCHLD].addr = NULL;
+        release(&parent->lock);
     }
     if (wakeinit)
         wakeup(init_proc);

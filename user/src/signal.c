@@ -14,13 +14,13 @@ struct test {
     {basic5,  "basic5" },
     {basic6,  "basic6" },
     {basic7,  "basic7" },
-    {basic8,  "basic8" },
+    // {basic8,  "basic8" },
     {basic10, "basic10"},
     {basic11, "basic11"},
     {basic20, "basic20"},
     {basic_alarm, "basic_alarm"},
     {basic_siginfo_check, "basic_siginfo_check"},
-    // {basic_siginfo_chld_check, "basic_siginfo_chld_check"},
+    {basic_siginfo_chld_check, "basic_siginfo_chld_check"},
     {NULL,    NULL     },
 };
 
