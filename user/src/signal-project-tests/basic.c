@@ -399,11 +399,11 @@ void basic_alarm(char* s) {
         assert_eq(remaining, 0);  // 之前没有alarm，应该返回0
         
         // 测试3：在alarm到期前设置新的alarm，应该返回剩余时间
-        sleep(2);  // 等待2秒
+        sleep(1);  // 等待1秒
         fprintf(1, "Setting new alarm for 3 seconds...\n");
         remaining = alarm(3);
         fprintf(1, "Previous alarm remaining time: %d seconds\n", remaining);
-        assert(remaining > 0);  // 应该返回剩余时间（约3秒）
+        assert(remaining > 0);  // 应该返回剩余时间（约4秒）
         
         // 测试4：取消alarm，应该返回剩余时间
         sleep(1);  // 等待1秒
