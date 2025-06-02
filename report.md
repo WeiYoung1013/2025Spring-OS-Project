@@ -321,7 +321,7 @@ void check_alarm(void) {
    - 验证信号在正确时间发送
 
 2. **取消alarm测试**（对应Checkpoint要求：如果seconds为0，取消任何待处理的alarm）
-   - 等待2秒后设置新alarm
+   - 等待1秒后设置新alarm
    - 验证返回剩余时间
    - 取消alarm并验证返回剩余时间
    - 验证alarm确实被取消（不会触发信号）
@@ -358,7 +358,7 @@ void basic_alarm(char* s) {
         fprintf(1, "Previous alarm remaining time: %d seconds\n", remaining);
         assert_eq(remaining, 0);  
         
-        sleep(2);  
+        sleep(1);  
         fprintf(1, "Setting new alarm for 3 seconds...\n");
         remaining = alarm(3);
         fprintf(1, "Previous alarm remaining time: %d seconds\n", remaining);

@@ -1,0 +1,528 @@
+<!DOCTYPE html><html><head>
+      <title>report</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:///c:\Users\Lenovo\.cursor\extensions\shd101wyy.markdown-preview-enhanced-0.8.18\crossnote\dependencies\katex\katex.min.css">
+      
+      
+      
+      
+      
+      <style>
+      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:'Helvetica Neue',Helvetica,'Segoe UI',Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:'\00a0'}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview ul{list-style:disc}.markdown-preview ul ul{list-style:circle}.markdown-preview ul ul ul{list-style:square}.markdown-preview ol{list-style:decimal}.markdown-preview ol ol,.markdown-preview ul ol{list-style-type:lower-roman}.markdown-preview ol ol ol,.markdown-preview ol ul ol,.markdown-preview ul ol ol,.markdown-preview ul ul ol{list-style-type:lower-alpha}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .code-chunk-btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px / 2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+      <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    // your code here
+  });
+</script></head><body for="html-export">
+    
+    
+      <div class="crossnote markdown-preview  ">
+      
+<h1 id="risc-v操作系统信号处理系统实现报告">RISC-V操作系统信号处理系统实现报告 </h1>
+<h2 id="12211308-袁龙-12213021-陈泽南-12213023-何家阳">12211308 袁龙 12213021 陈泽南 12213023 何家阳 </h2>
+<h2 id="1-项目概述">1. 项目概述 </h2>
+<p>本项目实现了一个符合POSIX标准的信号处理系统，该系统运行在RISC-V架构上。信号处理系统是操作系统中进程间通信的重要机制，允许进程接收和处理异步事件。项目分为三个主要阶段（Checkpoint）完成。</p>
+<h2 id="2-checkpoint-1基础信号处理机制实现">2. Checkpoint 1：基础信号处理机制实现 </h2>
+<h3 id="21-核心数据结构已给出">2.1 核心数据结构(已给出) </h3>
+<pre data-role="codeBlock" data-info="c" class="language-c c"><code><span class="token keyword keyword-struct">struct</span> <span class="token class-name">ksignal</span> <span class="token punctuation">{</span>
+    <span class="token class-name">sigaction_t</span> sa<span class="token punctuation">[</span>SIGMAX <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>     <span class="token comment">// 信号处理方式数组</span>
+    <span class="token class-name">siginfo_t</span> siginfos<span class="token punctuation">[</span>SIGMAX <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// 信号信息数组</span>
+    <span class="token class-name">sigset_t</span> sigmask<span class="token punctuation">;</span>               <span class="token comment">// 掩码</span>
+    <span class="token class-name">sigset_t</span> sigpending<span class="token punctuation">;</span>            <span class="token comment">// 待处理信号集</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword keyword-struct">struct</span> <span class="token class-name">sigaction</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-void">void</span> <span class="token punctuation">(</span><span class="token operator">*</span>sa_sigaction<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword keyword-int">int</span><span class="token punctuation">,</span> <span class="token class-name">siginfo_t</span><span class="token operator">*</span><span class="token punctuation">,</span> <span class="token keyword keyword-void">void</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 信号处理函数</span>
+    <span class="token class-name">sigset_t</span> sa_mask<span class="token punctuation">;</span>                              <span class="token comment">// 处理信号时的掩码</span>
+    <span class="token keyword keyword-void">void</span> <span class="token punctuation">(</span><span class="token operator">*</span>sa_restorer<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword keyword-void">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                     <span class="token comment">// 信号处理完成后的恢复函数</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword keyword-struct">struct</span> <span class="token class-name">siginfo</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-int">int</span> si_signo<span class="token punctuation">;</span>   <span class="token comment">// 信号编号</span>
+    <span class="token keyword keyword-int">int</span> si_code<span class="token punctuation">;</span>    <span class="token comment">// 信号产生的原因</span>
+    <span class="token keyword keyword-int">int</span> si_pid<span class="token punctuation">;</span>     <span class="token comment">// 发送信号的进程ID</span>
+    <span class="token keyword keyword-int">int</span> si_status<span class="token punctuation">;</span>  <span class="token comment">// 退出状态</span>
+    <span class="token keyword keyword-void">void</span><span class="token operator">*</span> addr<span class="token punctuation">;</span>     <span class="token comment">// 相关的内存地址</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre><h3 id="22-信号处理基本流程">2.2 信号处理基本流程 </h3>
+<ol>
+<li>信号注册流程：</li>
+</ol>
+<pre data-role="codeBlock" data-info="c" class="language-c c"><code><span class="token keyword keyword-int">int</span> <span class="token function">sys_sigaction</span><span class="token punctuation">(</span><span class="token keyword keyword-int">int</span> signo<span class="token punctuation">,</span> <span class="token keyword keyword-const">const</span> <span class="token class-name">sigaction_t</span> __user <span class="token operator">*</span>act<span class="token punctuation">,</span> <span class="token class-name">sigaction_t</span> __user <span class="token operator">*</span>oldact<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-struct">struct</span> <span class="token class-name">proc</span> <span class="token operator">*</span>p <span class="token operator">=</span> <span class="token function">curr_proc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-struct">struct</span> <span class="token class-name">mm</span> <span class="token operator">*</span>mm <span class="token operator">=</span> p<span class="token operator">-&gt;</span>mm<span class="token punctuation">;</span>
+    
+    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>signo <span class="token operator">&lt;</span> SIGMIN <span class="token operator">||</span> signo <span class="token operator">&gt;</span> SIGMAX<span class="token punctuation">)</span>
+        <span class="token keyword keyword-return">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+        
+    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>oldact <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">acquire</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>mm<span class="token operator">-&gt;</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span><span class="token function">copy_to_user</span><span class="token punctuation">(</span>mm<span class="token punctuation">,</span> <span class="token punctuation">(</span>uint64<span class="token punctuation">)</span>oldact<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword keyword-char">char</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>p<span class="token operator">-&gt;</span>signal<span class="token punctuation">.</span>sa<span class="token punctuation">[</span>signo<span class="token punctuation">]</span><span class="token punctuation">,</span> sc<span class="token operator">:</span>\Users\Lenovo\Downloads\report<span class="token punctuation">.</span><span class="token function">pdfizeof</span><span class="token punctuation">(</span><span class="token class-name">sigaction_t</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>mm<span class="token operator">-&gt;</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword keyword-return">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>mm<span class="token operator">-&gt;</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>act <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+        <span class="token keyword keyword-return">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        
+    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>signo <span class="token operator">==</span> SIGKILL <span class="token operator">||</span> signo <span class="token operator">==</span> SIGSTOP<span class="token punctuation">)</span>
+        <span class="token keyword keyword-return">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+        
+    <span class="token comment">// Get the new handler</span>
+    <span class="token class-name">sigaction_t</span> kact<span class="token punctuation">;</span>
+    <span class="token function">acquire</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>mm<span class="token operator">-&gt;</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span><span class="token function">copy_from_user</span><span class="token punctuation">(</span>mm<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword keyword-char">char</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>kact<span class="token punctuation">,</span> <span class="token punctuation">(</span>uint64<span class="token punctuation">)</span>act<span class="token punctuation">,</span> <span class="token keyword keyword-sizeof">sizeof</span><span class="token punctuation">(</span><span class="token class-name">sigaction_t</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>mm<span class="token operator">-&gt;</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword keyword-return">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>mm<span class="token operator">-&gt;</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    p<span class="token operator">-&gt;</span>signal<span class="token punctuation">.</span>sa<span class="token punctuation">[</span>signo<span class="token punctuation">]</span> <span class="token operator">=</span> kact<span class="token punctuation">;</span>
+    
+    <span class="token keyword keyword-return">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><ol start="2">
+<li>信号发送流程：</li>
+</ol>
+<pre data-role="codeBlock" data-info="c" class="language-c c"><code><span class="token keyword keyword-int">int</span> <span class="token function">sys_sigkill</span><span class="token punctuation">(</span><span class="token keyword keyword-int">int</span> pid<span class="token punctuation">,</span> <span class="token keyword keyword-int">int</span> signo<span class="token punctuation">,</span> <span class="token keyword keyword-int">int</span> code<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>signo <span class="token operator">&lt;</span> SIGMIN <span class="token operator">||</span> signo <span class="token operator">&gt;</span> SIGMAX<span class="token punctuation">)</span>
+        <span class="token keyword keyword-return">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// Traverse the process pool to find the target process</span>
+    <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span><span class="token keyword keyword-int">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> NPROC<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-struct">struct</span> <span class="token class-name">proc</span> <span class="token operator">*</span>p <span class="token operator">=</span> pool<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token function">acquire</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>p<span class="token operator">-&gt;</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>p<span class="token operator">-&gt;</span>pid <span class="token operator">==</span> pid<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            p<span class="token operator">-&gt;</span>signal<span class="token punctuation">.</span>sigpending <span class="token operator">|=</span> <span class="token function">sigmask</span><span class="token punctuation">(</span>signo<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            p<span class="token operator">-&gt;</span>signal<span class="token punctuation">.</span>siginfos<span class="token punctuation">[</span>signo<span class="token punctuation">]</span><span class="token punctuation">.</span>si_signo <span class="token operator">=</span> signo<span class="token punctuation">;</span>
+            p<span class="token operator">-&gt;</span>signal<span class="token punctuation">.</span>siginfos<span class="token punctuation">[</span>signo<span class="token punctuation">]</span><span class="token punctuation">.</span>si_code <span class="token operator">=</span> code<span class="token punctuation">;</span>
+            p<span class="token operator">-&gt;</span>signal<span class="token punctuation">.</span>siginfos<span class="token punctuation">[</span>signo<span class="token punctuation">]</span><span class="token punctuation">.</span>si_pid <span class="token operator">=</span> <span class="token function">curr_proc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-&gt;</span>pid<span class="token punctuation">;</span>
+            
+            <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>p<span class="token operator">-&gt;</span>state <span class="token operator">==</span> SLEEPING<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                p<span class="token operator">-&gt;</span>state <span class="token operator">=</span> RUNNABLE<span class="token punctuation">;</span>
+                <span class="token function">add_task</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            
+            <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>p<span class="token operator">-&gt;</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword keyword-return">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>p<span class="token operator">-&gt;</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token keyword keyword-return">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>  <span class="token comment">// Target process not found</span>
+<span class="token punctuation">}</span>
+</code></pre><h3 id="23-上下文保存与恢复">2.3 上下文保存与恢复 </h3>
+<ol>
+<li>上下文保存：</li>
+</ol>
+<pre data-role="codeBlock" data-info="c" class="language-c c"><code><span class="token keyword keyword-struct">struct</span> <span class="token class-name">ucontext</span> kcontext<span class="token punctuation">;</span>
+kcontext<span class="token punctuation">.</span>uc_sigmask <span class="token operator">=</span> old_mask<span class="token punctuation">;</span>
+kcontext<span class="token punctuation">.</span>uc_mcontext<span class="token punctuation">.</span>epc <span class="token operator">=</span> tf<span class="token operator">-&gt;</span>epc<span class="token punctuation">;</span>
+<span class="token function">memmove</span><span class="token punctuation">(</span>kcontext<span class="token punctuation">.</span>uc_mcontext<span class="token punctuation">.</span>regs<span class="token punctuation">,</span> <span class="token operator">&amp;</span>tf<span class="token operator">-&gt;</span>ra<span class="token punctuation">,</span> <span class="token number">31</span> <span class="token operator">*</span> <span class="token keyword keyword-sizeof">sizeof</span><span class="token punctuation">(</span>uint64<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><ol start="2">
+<li>上下文恢复：</li>
+</ol>
+<pre data-role="codeBlock" data-info="c" class="language-c c"><code><span class="token keyword keyword-int">int</span> <span class="token function">sys_sigreturn</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-struct">struct</span> <span class="token class-name">proc</span> <span class="token operator">*</span>p <span class="token operator">=</span> <span class="token function">curr_proc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-struct">struct</span> <span class="token class-name">trapframe</span> <span class="token operator">*</span>tf <span class="token operator">=</span> p<span class="token operator">-&gt;</span>trapframe<span class="token punctuation">;</span>
+    
+    <span class="token keyword keyword-struct">struct</span> <span class="token class-name">ucontext</span> kcontext<span class="token punctuation">;</span>
+    uint64 sp <span class="token operator">=</span> tf<span class="token operator">-&gt;</span>sp<span class="token punctuation">;</span>
+    
+    <span class="token comment">// Skip the siginfo_t struct and the space reserved for arguments</span>
+    sp <span class="token operator">+=</span> <span class="token number">16</span><span class="token punctuation">;</span>
+    sp <span class="token operator">+=</span> <span class="token keyword keyword-sizeof">sizeof</span><span class="token punctuation">(</span><span class="token class-name">siginfo_t</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    sp <span class="token operator">=</span> <span class="token punctuation">(</span>sp <span class="token operator">+</span> <span class="token number">0xf</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token operator">~</span><span class="token number">0xf</span><span class="token punctuation">;</span> 
+    
+    <span class="token comment">// Retrieve ucontext</span>
+    <span class="token function">acquire</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>p<span class="token operator">-&gt;</span>mm<span class="token operator">-&gt;</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-int">int</span> ret <span class="token operator">=</span> <span class="token function">copy_from_user</span><span class="token punctuation">(</span>p<span class="token operator">-&gt;</span>mm<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword keyword-char">char</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>kcontext<span class="token punctuation">,</span> sp<span class="token punctuation">,</span> <span class="token keyword keyword-sizeof">sizeof</span><span class="token punctuation">(</span><span class="token keyword keyword-struct">struct</span> <span class="token class-name">ucontext</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>p<span class="token operator">-&gt;</span>mm<span class="token operator">-&gt;</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>ret <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-return">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    p<span class="token operator">-&gt;</span>signal<span class="token punctuation">.</span>sigmask <span class="token operator">=</span> kcontext<span class="token punctuation">.</span>uc_sigmask<span class="token punctuation">;</span>
+    <span class="token function">memmove</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>tf<span class="token operator">-&gt;</span>ra<span class="token punctuation">,</span>kcontext<span class="token punctuation">.</span>uc_mcontext<span class="token punctuation">.</span>regs<span class="token punctuation">,</span> <span class="token number">31</span> <span class="token operator">*</span> <span class="token keyword keyword-sizeof">sizeof</span><span class="token punctuation">(</span>uint64<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword keyword-return">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><h2 id="3-checkpoint-2sigkill特殊处理">3. Checkpoint 2：SIGKILL特殊处理 </h2>
+<h3 id="31-sigkill的特性实现">3.1 SIGKILL的特性实现 </h3>
+<ol>
+<li>不可被忽略：</li>
+</ol>
+<pre data-role="codeBlock" data-info="c" class="language-c c"><code><span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>signo <span class="token operator">==</span> SIGKILL <span class="token operator">&amp;&amp;</span> sa<span class="token operator">-&gt;</span>sa_sigaction <span class="token operator">==</span> SIG_IGN<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">setkilled</span><span class="token punctuation">(</span>p<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">10</span> <span class="token operator">-</span> SIGKILL<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-return">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><ol start="2">
+<li>不可被阻塞：</li>
+</ol>
+<pre data-role="codeBlock" data-info="c" class="language-c c"><code><span class="token comment">// 在sigprocmask中确保SIGKILL不被阻塞</span>
+p<span class="token operator">-&gt;</span>signal<span class="token punctuation">.</span>sigmask <span class="token operator">&amp;=</span> <span class="token operator">~</span><span class="token function">sigmask</span><span class="token punctuation">(</span>SIGKILL<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><ol start="3">
+<li>不可被捕获：</li>
+</ol>
+<pre data-role="codeBlock" data-info="c" class="language-c c"><code><span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>signo <span class="token operator">==</span> SIGKILL <span class="token operator">&amp;&amp;</span> sa<span class="token operator">-&gt;</span>sa_sigaction <span class="token operator">!=</span> SIG_DFL<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">setkilled</span><span class="token punctuation">(</span>p<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">10</span> <span class="token operator">-</span> SIGKILL<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-return">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><h3 id="32-进程终止实现procc已给出">3.2 进程终止实现(proc.c已给出) </h3>
+<pre data-role="codeBlock" data-info="c" class="language-c c"><code><span class="token keyword keyword-void">void</span> <span class="token function">setkilled</span><span class="token punctuation">(</span><span class="token keyword keyword-struct">struct</span> <span class="token class-name">proc</span> <span class="token operator">*</span>p<span class="token punctuation">,</span> <span class="token keyword keyword-int">int</span> reason<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>reason <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">acquire</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>p<span class="token operator">-&gt;</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    p<span class="token operator">-&gt;</span>killed <span class="token operator">=</span> reason<span class="token punctuation">;</span>
+    <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>p<span class="token operator">-&gt;</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><h2 id="4-checkpoint-3-signal-across-fork-and-exec">4. Checkpoint 3: Signal across fork and exec </h2>
+<p>Fork实现如下：</p>
+<pre data-role="codeBlock" data-info="dotnetcli" class="language-dotnetcli dotnetcli"><code>int siginit_fork(struct proc *parent, struct proc *child) {
+    // 复制父进程的信号处理方式和信号掩码
+    for (int i = SIGMIN; i &lt;= SIGMAX; i++) {
+        child-&gt;signal.sa[i] = parent-&gt;signal.sa[i];
+    }
+    
+    // 继承父进程的信号掩码
+    child-&gt;signal.sigmask = parent-&gt;signal.sigmask;
+    
+    // 清空所有pending信号
+    child-&gt;signal.sigpending = 0;
+    memset(child-&gt;signal.siginfos, 0, sizeof(child-&gt;signal.siginfos));
+    
+    return 0;
+}
+
+</code></pre><p>在fork 时，子进程继承父进程的signal处理方式(sigaction)、signal mask，并且清空所有 pending signal。</p>
+<p>Exec实现如下：</p>
+<pre data-role="codeBlock" data-info="dotnetcli" class="language-dotnetcli dotnetcli"><code>int siginit_exec(struct proc *p) {
+    // 保存当前的信号掩码和pending信号
+    sigset_t old_mask = p-&gt;signal.sigmask;
+    sigset_t old_pending = p-&gt;signal.sigpending;
+    siginfo_t old_infos[SIGMAX + 1];
+    memmove(old_infos, p-&gt;signal.siginfos, sizeof(old_infos));
+    
+    // 重置所有信号处理方式为默认，除了被忽略的信号
+    for (int i = SIGMIN; i &lt;= SIGMAX; i++) {
+        if (p-&gt;signal.sa[i].sa_sigaction != SIG_IGN) {
+            p-&gt;signal.sa[i].sa_sigaction = SIG_DFL;
+            p-&gt;signal.sa[i].sa_mask = 0;
+            p-&gt;signal.sa[i].sa_restorer = NULL;
+        }
+    }
+    
+    // 恢复信号掩码和pending信号
+    p-&gt;signal.sigmask = old_mask;
+    p-&gt;signal.sigpending = old_pending;
+    memmove(p-&gt;signal.siginfos, old_infos, sizeof(old_infos));
+    
+    return 0;
+}
+</code></pre><p>在exec 时，子进程重置所有的signal处理方式为默认值，并且保留被手动指定为ignore的那些sigaction，signal mask 以及 pending signal 不变。</p>
+<h2 id="basic-check123-结果如下">Basic check123 结果如下： </h2>
+<p><img src="788ec28e3be2b21a2b82192c26dd8df0.png" alt="alt text"></p>
+<h2 id="5自选checkpoint">5.自选Checkpoint: </h2>
+<h3 id="511-sigalarm">5.1.1 SIGALARM </h3>
+<p>参考：alarm(2)。需要设计一个系统调用，它能设置一个时钟，在n秒后向用户进程发起一次信号SIGALRM。</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>unsigned int alarm(unsigned int seconds);
+</code></pre><ul>
+<li>alarm() 在指定的秒数后向调用进程发送SIGALRM信号</li>
+<li>如果seconds为0，则取消任何待处理的alarm</li>
+<li>alarm() 返回之前设置的alarm的剩余秒数，如果没有之前设置的alarm则返回0</li>
+</ul>
+<h3 id="512保存时钟状态的数据结构">5.1.2保存时钟状态的数据结构 </h3>
+<pre data-role="codeBlock" data-info="c" class="language-c c"><code><span class="token keyword keyword-struct">struct</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-struct">struct</span> <span class="token class-name">spinlock</span> lock<span class="token punctuation">;</span>
+    uint64 alarm_time<span class="token punctuation">;</span>  <span class="token comment">// 以CPU周期为单位的alarm时间</span>
+<span class="token punctuation">}</span> alarm_state<span class="token punctuation">;</span>
+</code></pre><ul>
+<li>使用自旋锁保护对<code>alarm_time</code>的访问</li>
+<li><code>alarm_time</code>以CPU周期为单位存储时间</li>
+</ul>
+<h4 id="513-alarm系统调用">5.1.3 alarm系统调用 </h4>
+<pre data-role="codeBlock" data-info="c" class="language-c c"><code><span class="token keyword keyword-unsigned">unsigned</span> <span class="token keyword keyword-int">int</span> <span class="token function">alarm</span><span class="token punctuation">(</span><span class="token keyword keyword-unsigned">unsigned</span> <span class="token keyword keyword-int">int</span> seconds<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-struct">struct</span> <span class="token class-name">proc</span> <span class="token operator">*</span>p <span class="token operator">=</span> <span class="token function">curr_proc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    uint64 current_time <span class="token operator">=</span> <span class="token function">r_time</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-unsigned">unsigned</span> <span class="token keyword keyword-int">int</span> remaining <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    
+    <span class="token function">acquire</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>alarm_state<span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token comment">// 如果seconds为0，取消现有的alarm</span>
+    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>seconds <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>alarm_state<span class="token punctuation">.</span>alarm_time <span class="token operator">&gt;</span> current_time<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            remaining <span class="token operator">=</span> <span class="token punctuation">(</span>alarm_state<span class="token punctuation">.</span>alarm_time <span class="token operator">-</span> current_time<span class="token punctuation">)</span> <span class="token operator">/</span> CPU_FREQ<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        alarm_state<span class="token punctuation">.</span>alarm_time <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword keyword-else">else</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 计算新的alarm时间</span>
+        uint64 new_alarm_time <span class="token operator">=</span> current_time <span class="token operator">+</span> seconds <span class="token operator">*</span> CPU_FREQ<span class="token punctuation">;</span>
+        
+        <span class="token comment">// 如果已有alarm，计算剩余时间</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>alarm_state<span class="token punctuation">.</span>alarm_time <span class="token operator">&gt;</span> current_time<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            remaining <span class="token operator">=</span> <span class="token punctuation">(</span>alarm_state<span class="token punctuation">.</span>alarm_time <span class="token operator">-</span> current_time<span class="token punctuation">)</span> <span class="token operator">/</span> CPU_FREQ<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        
+        <span class="token comment">// 设置新的alarm时间</span>
+        alarm_state<span class="token punctuation">.</span>alarm_time <span class="token operator">=</span> new_alarm_time<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>alarm_state<span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-return">return</span> remaining<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><h4 id="514-定时器检查函数">5.1.4 定时器检查函数 </h4>
+<pre data-role="codeBlock" data-info="c" class="language-c c"><code><span class="token keyword keyword-void">void</span> <span class="token function">check_alarm</span><span class="token punctuation">(</span><span class="token keyword keyword-void">void</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-struct">struct</span> <span class="token class-name">proc</span> <span class="token operator">*</span>p <span class="token operator">=</span> <span class="token function">curr_proc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>p <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-return">return</span><span class="token punctuation">;</span>  <span class="token comment">// 如果没有当前进程，直接返回</span>
+    <span class="token punctuation">}</span>
+    
+    uint64 current_time <span class="token operator">=</span> <span class="token function">r_time</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token function">acquire</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>alarm_state<span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>alarm_state<span class="token punctuation">.</span>alarm_time <span class="token operator">&gt;</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> current_time <span class="token operator">&gt;=</span> alarm_state<span class="token punctuation">.</span>alarm_time<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 发送SIGALRM信号</span>
+        <span class="token function">acquire</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>p<span class="token operator">-&gt;</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        p<span class="token operator">-&gt;</span>signal<span class="token punctuation">.</span>sigpending <span class="token operator">|=</span> <span class="token function">sigmask</span><span class="token punctuation">(</span>SIGALRM<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        p<span class="token operator">-&gt;</span>signal<span class="token punctuation">.</span>siginfos<span class="token punctuation">[</span>SIGALRM<span class="token punctuation">]</span><span class="token punctuation">.</span>si_signo <span class="token operator">=</span> SIGALRM<span class="token punctuation">;</span>
+        p<span class="token operator">-&gt;</span>signal<span class="token punctuation">.</span>siginfos<span class="token punctuation">[</span>SIGALRM<span class="token punctuation">]</span><span class="token punctuation">.</span>si_pid <span class="token operator">=</span> p<span class="token operator">-&gt;</span>pid<span class="token punctuation">;</span>
+        <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>p<span class="token operator">-&gt;</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        
+        <span class="token comment">// 清除alarm时间</span>
+        alarm_state<span class="token punctuation">.</span>alarm_time <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>alarm_state<span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><h4 id="515-测试验证">5.1.5 测试验证 </h4>
+<ol>
+<li>
+<p><strong>基本功能测试</strong>（对应Checkpoint要求：在指定秒数后发送SIGALRM信号）</p>
+<ul>
+<li>设置5秒alarm</li>
+<li>验证返回值为0（之前没有alarm）</li>
+<li>验证信号在正确时间发送</li>
+</ul>
+</li>
+<li>
+<p><strong>取消alarm测试</strong>（对应Checkpoint要求：如果seconds为0，取消任何待处理的alarm）</p>
+<ul>
+<li>等待1秒后设置新alarm</li>
+<li>验证返回剩余时间</li>
+<li>取消alarm并验证返回剩余时间</li>
+<li>验证alarm确实被取消（不会触发信号）</li>
+</ul>
+</li>
+</ol>
+<p>实现：</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>// alarm信号处理函数
+void handler_alarm(int signo, siginfo_t* info, void* ctx) {
+    assert(signo == SIGALRM);
+    assert(info-&gt;si_signo == SIGALRM);
+    assert(info-&gt;si_pid == getpid());
+    fprintf(1, "SIGALRM handler triggered!\n");
+    fprintf(1, "Signal number: %d\n", signo);
+    fprintf(1, "Process ID: %d\n", info-&gt;si_pid);
+    exit(200);
+}
+
+// 测试alarm系统调用
+void basic_alarm(char* s) {
+    int pid = fork();
+    if (pid == 0) {
+        fprintf(1, "Child process started\n");
+    
+        sigaction_t sa = {
+            .sa_sigaction = handler_alarm,
+            .sa_restorer = sigreturn,
+        };
+        sigemptyset(&amp;sa.sa_mask);
+        sigaction(SIGALRM, &amp;sa, 0);
+        fprintf(1, "SIGALRM handler set\n");
+        
+        fprintf(1, "Setting first alarm for 5 seconds...\n");
+        unsigned int remaining = alarm(5);
+        fprintf(1, "Previous alarm remaining time: %d seconds\n", remaining);
+        assert_eq(remaining, 0);  
+        
+        sleep(1);  
+        fprintf(1, "Setting new alarm for 3 seconds...\n");
+        remaining = alarm(3);
+        fprintf(1, "Previous alarm remaining time: %d seconds\n", remaining);
+        assert(remaining &gt; 0); 
+        sleep(1);  
+        fprintf(1, "Canceling alarm...\n");
+        remaining = alarm(0);
+        fprintf(1, "Previous alarm remaining time: %d seconds\n", remaining);
+        assert(remaining &gt; 0); 
+        
+        fprintf(1, "Setting final alarm for 2 seconds...\n");
+        remaining = alarm(2);
+        fprintf(1, "Previous alarm remaining time: %d seconds\n", remaining);
+        assert_eq(remaining, 0);  
+        fprintf(1, "Waiting for alarm...\n");
+        while(1);
+        exit(1);
+    } else {
+        fprintf(1, "Parent process waiting for child...\n");
+        int ret;
+        wait(0, &amp;ret);
+        fprintf(1, "Child process exited with code: %d\n", ret);
+        assert_eq(ret, 200);  // 信号处理函数应该返回200
+    }
+}
+</code></pre><h3 id="52--checkpoint--siginfo">5.2  Checkpoint- siginfo </h3>
+<p>在每次进入 userspace signal handler 前，即在<code>do_signal</code>中在用户栈上构造siginfo结构体，并将它传给用户模式sigactionhandler</p>
+<pre data-role="codeBlock" data-info="c" class="language-c c"><code><span class="token keyword keyword-int">int</span> <span class="token function">do_signal</span><span class="token punctuation">(</span><span class="token keyword keyword-void">void</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+  <span class="token class-name">siginfo_t</span> <span class="token operator">*</span>kinfo <span class="token operator">=</span> <span class="token operator">&amp;</span>p<span class="token operator">-&gt;</span>signal<span class="token punctuation">.</span>siginfos<span class="token punctuation">[</span>signo<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    kinfo<span class="token operator">-&gt;</span>si_signo  <span class="token operator">=</span> signo<span class="token punctuation">;</span>
+    <span class="token comment">// 如果 si_pid 已由 sys_sigkill 设置则保持，否则置为 -1（内核触发）</span>
+    kinfo<span class="token operator">-&gt;</span>si_pid    <span class="token operator">=</span> <span class="token punctuation">(</span>kinfo<span class="token operator">-&gt;</span>si_pid <span class="token operator">!=</span> <span class="token number">0</span> <span class="token operator">?</span> kinfo<span class="token operator">-&gt;</span>si_pid <span class="token operator">:</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-if">if</span><span class="token punctuation">(</span>kinfo<span class="token operator">-&gt;</span>si_signo <span class="token operator">!=</span> SIGCHLD<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        kinfo<span class="token operator">-&gt;</span>si_code   <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        kinfo<span class="token operator">-&gt;</span>si_status <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    kinfo<span class="token operator">-&gt;</span>addr      <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"do_signal: signo=%d, pid=%d, code=%d, status=%d\n"</span><span class="token punctuation">,</span> 
+                    signo<span class="token punctuation">,</span> 
+                    kinfo<span class="token operator">-&gt;</span>si_pid<span class="token punctuation">,</span> 
+                    kinfo<span class="token operator">-&gt;</span>si_code<span class="token punctuation">,</span> 
+                    kinfo<span class="token operator">-&gt;</span>si_status<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 为siginfo预留空间</span>
+    sp <span class="token operator">-=</span> <span class="token keyword keyword-sizeof">sizeof</span><span class="token punctuation">(</span><span class="token class-name">siginfo_t</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    sp <span class="token operator">&amp;=</span> <span class="token operator">~</span><span class="token number">0xf</span><span class="token punctuation">;</span>  <span class="token comment">// 16字节对齐</span>
+    uint64 siginfo_addr <span class="token operator">=</span> sp<span class="token punctuation">;</span>
+
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+    <span class="token function">copy_to_user</span><span class="token punctuation">(</span>mm<span class="token punctuation">,</span> siginfo_addr<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword keyword-char">char</span><span class="token operator">*</span><span class="token punctuation">)</span>kinfo<span class="token punctuation">,</span> <span class="token keyword keyword-sizeof">sizeof</span><span class="token punctuation">(</span><span class="token class-name">siginfo_t</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token punctuation">}</span>
+    
+</code></pre><p>对该checkpoint的basic test如下：<br>
+由于我们在自选checkpoint中未实现由内核发送的signal信号，因此这里仅测试由进程发送的signal， <code>sigkill(pid, SIGUSR1, 2);</code></p>
+<pre data-role="codeBlock" data-info="c" class="language-c c"><code><span class="token comment">// 验证 siginfo_t 结构体的各字段：</span>
+<span class="token comment">// si_signo  应是 SIGUSR1</span>
+<span class="token comment">// si_pid    应是发送者（parent）的 pid</span>
+<span class="token comment">// si_code   应为 0</span>
+<span class="token comment">// si_status 应为 0</span>
+<span class="token comment">// addr      应为 NULL</span>
+<span class="token keyword keyword-void">void</span> <span class="token function">siginfo_handler</span><span class="token punctuation">(</span><span class="token keyword keyword-int">int</span> signo<span class="token punctuation">,</span> <span class="token class-name">siginfo_t</span> <span class="token operator">*</span>info<span class="token punctuation">,</span> <span class="token keyword keyword-void">void</span> <span class="token operator">*</span>ctx<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Check signo=%d, pid=%d, code=%d, status=%d\n"</span><span class="token punctuation">,</span> info<span class="token operator">-&gt;</span>si_signo<span class="token punctuation">,</span> info<span class="token operator">-&gt;</span>si_pid<span class="token punctuation">,</span> info<span class="token operator">-&gt;</span>si_code<span class="token punctuation">,</span> info<span class="token operator">-&gt;</span>si_status<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 检查信号编号</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>signo <span class="token operator">==</span> SIGUSR1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 检查 si_signo</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>info<span class="token operator">-&gt;</span>si_signo <span class="token operator">==</span> SIGUSR1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 检查 si_pid（父进程发送）</span>
+    <span class="token keyword keyword-int">int</span> ppid <span class="token operator">=</span> <span class="token function">getppid</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>info<span class="token operator">-&gt;</span>si_pid <span class="token operator">==</span> ppid<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 检查其他字段</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>info<span class="token operator">-&gt;</span>si_code <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>info<span class="token operator">-&gt;</span>si_status <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>info<span class="token operator">-&gt;</span>addr <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 如果都通过，则退出并返回特定码</span>
+    <span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-void">void</span> <span class="token function">basic_siginfo_check</span><span class="token punctuation">(</span><span class="token keyword keyword-char">char</span> <span class="token operator">*</span>s<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 在子进程安装 handler</span>
+    <span class="token keyword keyword-int">int</span> pid <span class="token operator">=</span> <span class="token function">fork</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>pid <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">sigaction_t</span> sa <span class="token operator">=</span> <span class="token punctuation">{</span>
+            <span class="token punctuation">.</span>sa_sigaction <span class="token operator">=</span> siginfo_handler<span class="token punctuation">,</span>
+            <span class="token punctuation">.</span>sa_restorer  <span class="token operator">=</span> sigreturn<span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+        <span class="token function">sigemptyset</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>sa<span class="token punctuation">.</span>sa_mask<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">sigaction</span><span class="token punctuation">(</span>SIGUSR1<span class="token punctuation">,</span> <span class="token operator">&amp;</span>sa<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// 等待信号</span>
+        <span class="token keyword keyword-while">while</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword keyword-else">else</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 父进程稍等，让子进程安装好 handler</span>
+        <span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// 由父进程发送 SIGUSR1</span>
+        <span class="token function">sigkill</span><span class="token punctuation">(</span>pid<span class="token punctuation">,</span> SIGUSR1<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// 等待子进程退出并检查它的 exit code</span>
+        <span class="token keyword keyword-int">int</span> status<span class="token punctuation">;</span>
+        <span class="token function">wait</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>status<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// 我们在 handler 里用 exit(123)，因此这里应该收到 123</span>
+        <span class="token function">assert_eq</span><span class="token punctuation">(</span>status<span class="token punctuation">,</span> <span class="token number">123</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><h3 id="53-sigchld">5.3 SIGCHLD </h3>
+<p>在这个Checkpoint中，我们在进程的exit函数中增加了向其父进程传递SIGCHLD信号的逻辑，并在do_signal函数中进行相应的操作，最后设计了一个testcases来实现handler函数对信号的自动处理功能。相应代码如下：</p>
+<ol>
+<li>exit函数发出SIGCHLD信号</li>
+</ol>
+<pre data-role="codeBlock" data-info="c" class="language-c c"><code><span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>parent<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">acquire</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>parent<span class="token operator">-&gt;</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        parent<span class="token operator">-&gt;</span>signal<span class="token punctuation">.</span>sigpending <span class="token operator">|=</span> <span class="token function">sigmask</span><span class="token punctuation">(</span>SIGCHLD<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        parent<span class="token operator">-&gt;</span>signal<span class="token punctuation">.</span>siginfos<span class="token punctuation">[</span>SIGCHLD<span class="token punctuation">]</span><span class="token punctuation">.</span>si_signo <span class="token operator">=</span> SIGCHLD<span class="token punctuation">;</span>
+        parent<span class="token operator">-&gt;</span>signal<span class="token punctuation">.</span>siginfos<span class="token punctuation">[</span>SIGCHLD<span class="token punctuation">]</span><span class="token punctuation">.</span>si_pid <span class="token operator">=</span> p<span class="token operator">-&gt;</span>pid<span class="token punctuation">;</span>
+        parent<span class="token operator">-&gt;</span>signal<span class="token punctuation">.</span>siginfos<span class="token punctuation">[</span>SIGCHLD<span class="token punctuation">]</span><span class="token punctuation">.</span>si_code <span class="token operator">=</span> code<span class="token punctuation">;</span> <span class="token comment">// 退出码</span>
+        parent<span class="token operator">-&gt;</span>signal<span class="token punctuation">.</span>siginfos<span class="token punctuation">[</span>SIGCHLD<span class="token punctuation">]</span><span class="token punctuation">.</span>si_status <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        parent<span class="token operator">-&gt;</span>signal<span class="token punctuation">.</span>siginfos<span class="token punctuation">[</span>SIGCHLD<span class="token punctuation">]</span><span class="token punctuation">.</span>addr <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+        <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>parent<span class="token operator">-&gt;</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre><ol start="2">
+<li>do_signal中对SIGCHLD保留siginfo中的数据：</li>
+</ol>
+<pre data-role="codeBlock" data-info="c" class="language-c c"><code><span class="token keyword keyword-if">if</span><span class="token punctuation">(</span>kinfo<span class="token operator">-&gt;</span>si_signo <span class="token operator">!=</span> SIGCHLD<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        kinfo<span class="token operator">-&gt;</span>si_code   <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        kinfo<span class="token operator">-&gt;</span>si_status <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre><ol start="3">
+<li>testcase中handler的实现：</li>
+</ol>
+<pre data-role="codeBlock" data-info="c" class="language-c c"><code><span class="token keyword keyword-void">void</span> <span class="token function">siginfo_chld_handler</span><span class="token punctuation">(</span><span class="token keyword keyword-int">int</span> signo<span class="token punctuation">,</span> <span class="token class-name">siginfo_t</span> <span class="token operator">*</span>info<span class="token punctuation">,</span> <span class="token keyword keyword-void">void</span> <span class="token operator">*</span>ctx<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>signo <span class="token operator">==</span> SIGCHLD<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>info<span class="token operator">-&gt;</span>si_signo <span class="token operator">==</span> SIGCHLD<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>info<span class="token operator">-&gt;</span>si_pid <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                 <span class="token comment">// 子进程 pid</span>
+    <span class="token keyword keyword-int">int</span> status<span class="token punctuation">;</span>
+    <span class="token keyword keyword-int">int</span> ret <span class="token operator">=</span> <span class="token function">wait</span><span class="token punctuation">(</span>info<span class="token operator">-&gt;</span>si_pid<span class="token punctuation">,</span> <span class="token operator">&amp;</span>status<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>ret <span class="token operator">==</span> info<span class="token operator">-&gt;</span>si_pid<span class="token punctuation">)</span><span class="token punctuation">;</span>               <span class="token comment">// 回收的就是发送信号的子进程</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>info<span class="token operator">-&gt;</span>si_code <span class="token operator">==</span> <span class="token number">77</span><span class="token punctuation">)</span><span class="token punctuation">;</span>               <span class="token comment">// 你的实现：退出码放在 si_code</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"SIGCHLD handler: signo=%d, pid=%d, code=%d, status=%d\n"</span><span class="token punctuation">,</span>
+        info<span class="token operator">-&gt;</span>si_signo<span class="token punctuation">,</span> info<span class="token operator">-&gt;</span>si_pid<span class="token punctuation">,</span> info<span class="token operator">-&gt;</span>si_code<span class="token punctuation">,</span> status<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-void">void</span> <span class="token function">basic_siginfo_chld_check</span><span class="token punctuation">(</span><span class="token keyword keyword-char">char</span> <span class="token operator">*</span>s<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-int">int</span> pid <span class="token operator">=</span> <span class="token function">fork</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>pid <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">77</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword keyword-else">else</span> <span class="token punctuation">{</span>
+        <span class="token class-name">sigaction_t</span> sa <span class="token operator">=</span> <span class="token punctuation">{</span>
+            <span class="token punctuation">.</span>sa_sigaction <span class="token operator">=</span> siginfo_chld_handler<span class="token punctuation">,</span>
+            <span class="token punctuation">.</span>sa_restorer  <span class="token operator">=</span> sigreturn<span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+        <span class="token function">sigemptyset</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>sa<span class="token punctuation">.</span>sa_mask<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">sigaction</span><span class="token punctuation">(</span>SIGCHLD<span class="token punctuation">,</span> <span class="token operator">&amp;</span>sa<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Parent: child should have been reaped by handler.\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><h3 id="54-自选checkpoints-结果解释和实现如上">5.4 自选Checkpoints 结果（解释和实现如上）： </h3>
+<p><img src="2c80fc8c576e3cfabc6e5758a4d82c4e_720-1.png" alt="alt text"></p>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
